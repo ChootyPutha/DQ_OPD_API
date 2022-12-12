@@ -2,9 +2,11 @@ import express, {Application, Request, Response, NextFunction} from "express";
 import config from 'config';
 import connect from "./utils/dbConnction";
 import log from "./Logger/logger";
+import routes from "./routes/routes";
 const port = config.get<number>('port'); 
 
-const app: Application = express();
+// const app: Application = express();
+const app = express();
 
 app.get('/',(req : Request, resp : Response, next : NextFunction) => {
     resp.send("Welcome to OPD API");
@@ -13,4 +15,5 @@ app.get('/',(req : Request, resp : Response, next : NextFunction) => {
 app.listen(port ,async ()=>{
     log.info(`App is running at http://127.0.0.1:${port}`);
     await connect();
+    routes(app);
 });
