@@ -8,6 +8,8 @@ const port = config.get<number>('port');
 // const app: Application = express();
 const app = express();
 
+app.use(express.json());
+
 app.get('/',(req : Request, resp : Response, next : NextFunction) => {
     resp.send("Welcome to OPD API");
 });

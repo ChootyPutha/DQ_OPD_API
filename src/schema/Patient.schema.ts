@@ -1,6 +1,6 @@
 import {object, string, TypeOf} from 'zod';
 
-export const createPatientScheam = object({
+const payload = {
     body : object({
         name : string({
             required_error : "Name is required",
@@ -22,7 +22,23 @@ export const createPatientScheam = object({
           }),
         
     }),
+}
+
+const params = {
+    params : object({
+        patientId : string({
+            required_error : "UserId is required"
+        }),
+    }),
+}
+
+export const createPatientScheam = object({
+    ...payload
 });
 
+export const getPatientInfoByIdScheam = object({
+    ...params,
+})
 
 export type CreatePatientInput = Omit<TypeOf<typeof createPatientScheam>,"body.confirmPassowrd">;
+export type GetPatientInfoInput = TypeOf<typeof getPatientInfoByIdScheam>;

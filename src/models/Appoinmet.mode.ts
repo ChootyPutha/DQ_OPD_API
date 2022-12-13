@@ -7,7 +7,7 @@ export interface AppoinmentInput {
     channel : ChannelDocument['_id'];
     patient : PatientDocument['_id'];
     appoinmentTime : string,
-    appoinmentNumber : number,
+    appoinmentNumber? : number,
     appoinmentStatus : string,
 }
 

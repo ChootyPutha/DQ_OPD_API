@@ -5,8 +5,8 @@ export const createChannelSchama = object({
         doctor : string({
             required_error : "Doctor ID is reqired",
         }),
-        channelDate : date({
-            required_error : "Channel Date is reqired",
+        channelDate : string({
+            required_error : "Channel Datess is reqired",
         }),
         startTime : string({
             required_error : "Channel Start Time is reqired",
@@ -17,10 +17,10 @@ export const createChannelSchama = object({
         duration : number({
             required_error : "Single Channel Duration is reqired",
         }),
-        channelCount : number({
+        countChannel : number({
             required_error : "Channel Count is reqired",
         }),
     }),
 });
 
-export type CreateChannelInput =  typeof createChannelSchama;
+export type CreateChannelInput =  Omit<TypeOf<typeof createChannelSchama>,"">;

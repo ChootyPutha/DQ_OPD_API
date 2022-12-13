@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 export interface DoctorInput {
     doctorName: string,
     doctorType: string,
-    description: string
+    description?: string
 }
 
 export interface DoctorDocument extends DoctorInput, mongoose.Document {

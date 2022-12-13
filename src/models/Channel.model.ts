@@ -3,7 +3,7 @@ import { DoctorDocument } from "./Doctor.model";
 
 export interface ChannelInput {
     doctor : DoctorDocument["_id"];
-    chanelDate : Date;
+    channelDate : string;
     startTime : string;
     endTime : string;
     duration : number;
@@ -17,7 +17,7 @@ export interface ChannelDocument extends ChannelInput, mongoose.Document {
 
 const channelSchema = new mongoose.Schema({
     doctor: { type: mongoose.Schema.Types.ObjectId, ref: "Doctors" },
-    channelDate : {type : Date, required : true},
+    channelDate : {type : String, required : true},
     startTime : {type : String, required : true},
     endTime : {type : String, required : true},
     duration : {type : Number, required : true},
