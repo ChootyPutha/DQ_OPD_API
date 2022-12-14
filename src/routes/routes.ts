@@ -1,12 +1,12 @@
 import { Express, Request, Response } from "express";
 import { authAdminHandler, createAdminHandeler } from "../controller/Admin.controller";
-import { createAppoinmentHandeler, getAllAppoinmentListByChannelId, } from "../controller/Appoinments.controller";
+import { createAppoinmentHandeler, getAllApoinmentListByPatientId, getAllAppoinmentListByChannelId,  } from "../controller/Appoinments.controller";
 import { createChannelHandeler, getAllChannelHandeler } from "../controller/Channel.controller";
-import { createDoctorHandeler } from "../controller/Doctor.controller";
+import { createDoctorHandeler, getAllDoctorHandeler } from "../controller/Doctor.controller";
 import { authPatinetHandler, createPatinetHandler, getPatientInfoByIdHandler } from "../controller/Patient.controller";
 import validateResource from "../middleware/validateResource";
 import { createAdminScheam } from "../schema/Admin.schema";
-import { createAppoinmentSchama, getAllAppoinmentByChannelIdSchema } from "../schema/Appoinment.schema";
+import { createAppoinmentSchama, getAllAppoinmentByChannelIdSchema, getAllAppoinmentByPatientIdSchema,  } from "../schema/Appoinment.schema";
 import { createChannelSchama } from "../schema/Channel.schema";
 import { createDoctorSchama } from "../schema/Doctor.schema";
 import { createPatientScheam, getPatientInfoByIdScheam } from "../schema/Patient.schema";
@@ -23,6 +23,8 @@ function routes(app : Express){
 
     app.post('/api/doctor',validateResource(createDoctorSchama),createDoctorHandeler);
 
+    app.get('/api/doctor',getAllDoctorHandeler);
+
     app.post('/api/channel',validateResource(createChannelSchama),createChannelHandeler);
 
     app.get('/api/channel',getAllChannelHandeler);
@@ -30,6 +32,8 @@ function routes(app : Express){
     app.post('/api/appoinment',validateResource(createAppoinmentSchama),createAppoinmentHandeler);
 
     app.get('/api/appoinment/:channelId',validateResource(getAllAppoinmentByChannelIdSchema),getAllAppoinmentListByChannelId);
+
+    app.get('/api/appoinment/:patientId',validateResource(getAllAppoinmentByPatientIdSchema),getAllApoinmentListByPatientId);
 
     app.post('/api/auth/patient',validateResource(createSessionScheam),authPatinetHandler);
     

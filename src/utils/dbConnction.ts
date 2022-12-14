@@ -1,10 +1,13 @@
 import mongoose from "mongoose";
-import  config  from "config";
 import log from "../Logger/logger";
+import config from "./config";
 
 async function connect(){
   
-    const dbURI = config.get<string>("dbUri");
+   // const dbURI = config.get<string>("dbUri");
+    const dbURI:string = config.MONGO_URI;
+
+    //log.info(dbURI,"db env url");
 
     return await  mongoose.connect(dbURI).then(()=>{
         log.info("Successfully connect to mongodb");

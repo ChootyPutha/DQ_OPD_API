@@ -4,6 +4,14 @@ export interface SessionInput {
     type : string
 }
 
+export interface ParamInput {
+    channel : string
+}
+
+export interface PatientParmInput {
+    patientId : string
+}
+
 // const AuthenticatedObj : SessionInput = {
 
 // }

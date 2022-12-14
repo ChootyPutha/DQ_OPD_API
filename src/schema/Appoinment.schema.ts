@@ -31,6 +31,14 @@ const channelParams = {
     }),
 }
 
+const paitenParams = {
+    params : object({
+        patientId : string({
+            required_error : "patient Id is reqired"
+        }),
+    }),
+}
+
 export const createAppoinmentSchama = object({
     ...payload,
 });
@@ -39,6 +47,10 @@ export const getAllAppoinmentByChannelIdSchema = object({
     ...channelParams,
 });
 
+export const getAllAppoinmentByPatientIdSchema = object({
+    ...paitenParams,
+});
 
 export type CreateAppoinmentInput =  Omit<TypeOf<typeof createAppoinmentSchama>,"">;
 export type GetAllApoinmentByChannelInput = TypeOf<typeof getAllAppoinmentByChannelIdSchema>;
+export type getAllAppoinmentByPatientInput = TypeOf<typeof getAllAppoinmentByPatientIdSchema>;

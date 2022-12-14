@@ -13,7 +13,17 @@ export async function createChannel(inputs:ChannelInput) {
 
  export async function getAllChannelInfo(){
     try {
-        const channel = await ChannelModel.find({});
+        //const channel = await ChannelModel.find({});
+        const channel =  await ChannelModel.aggregate([
+            {
+                $lookup : {
+                    from : "doctors",
+                    localField : "doctor",
+                    foreignField : "_id",
+                    as : "docsInfo",
+                 }
+            },
+        ]);
         return channel;
     } catch (e : any) {
         throw new Error(e);

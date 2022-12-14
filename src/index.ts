@@ -3,10 +3,12 @@ import config from 'config';
 import connect from "./utils/dbConnction";
 import log from "./Logger/logger";
 import routes from "./routes/routes";
+import  dotenv from 'dotenv';
 const port = config.get<number>('port'); 
 
+dotenv.config();
 // const app: Application = express();
-const app = express();
+export const app = express();
 
 app.use(express.json());
 

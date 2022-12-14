@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
+import mongoose,{ ObjectId } from 'mongoose'; 
 import log from '../Logger/logger';
 import AppoinmentModel, { AppoinemntDocument } from '../models/Appoinmet.mode';
 import { PatientDocument } from '../models/Patient.model';
-import { CreateAppoinmentInput, GetAllApoinmentByChannelInput } from '../schema/Appoinment.schema';
-import { createAppoinment, getAllApoinmentInfoByChannel } from '../service/Appoinment.service';
+import { CreateAppoinmentInput, GetAllApoinmentByChannelInput, getAllAppoinmentByPatientInput } from '../schema/Appoinment.schema';
+import { createAppoinment, getAllApoinmentInfoByChannel, getAllApoinmentInfoByPatient } from '../service/Appoinment.service';
 import { getPatientInfoById } from '../service/Patient.service';
 
 import { sendEmails } from '../utils/transporter';
@@ -40,8 +41,8 @@ export async function createAppoinmentHandeler(req: Request<{}, {}, CreateAppoin
 
 export async function getAllAppoinmentListByChannelId(req: Request<GetAllApoinmentByChannelInput['params']>, resp: Response) {
     try {
-        const channel = req.params.channelId;
-        const apoinmentList = await getAllApoinmentInfoByChannel({ channel });
+        const channel: string = req.params.channelId;
+        const apoinmentList = await getAllApoinmentInfoByChannel({channel});
 
         if (!apoinmentList) {
             return resp.sendStatus(404);
@@ -53,6 +54,19 @@ export async function getAllAppoinmentListByChannelId(req: Request<GetAllApoinme
     }
 }
 
-export async function getAllApoinmentListByUserId() {
+export async function getAllApoinmentListByPatientId(req: Request<getAllAppoinmentByPatientInput['params']>, resp: Response) {
+    try {
+        const patientId: string = req.params.patientId;
+        const apoinmentList = await getAllApoinmentInfoByPatient({patientId});
 
+        console.log("datss "+JSON.stringify(apoinmentList));
+
+        if (!apoinmentList) {
+            return resp.sendStatus(404);
+        }
+        return resp.send(apoinmentList);
+    } catch (e: any) {
+        log.error(e);
+        return resp.status(409).send(e.message);
+    }
 }
