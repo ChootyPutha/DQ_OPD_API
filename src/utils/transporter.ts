@@ -1,11 +1,12 @@
 import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
+import config from './config';
 
 async function main() {
     const service : string  =  "gmail";
     const port : number = 587;
-    const username : string = "dineshmadushankagss2015@gmail.com";
-    const password : string = "ycqigpscguokfzmb";
+    const username : string = config.EMAIL;
+    const password : string = config.PASSWORD;
 
     const transporter = nodemailer.createTransport({
         service : service,
