@@ -5,15 +5,24 @@ dotenv.config({path : path.resolve(__dirname,"../utils/config.env")});
 
 interface ENV {
     MONGO_URI: string | undefined;
+    PORT : number | undefined;
+    EMAIL : string | undefined;
+    PASSWORD : string | undefined;
 }
 
 interface Config {
     MONGO_URI: string;
+    PORT : number,
+    EMAIL : string,
+    PASSWORD : string,
 }
 
 const getConfig = () : ENV => {
     return{
-        MONGO_URI : process.env.MONGO_URI
+        MONGO_URI : process.env.MONGO_URI,
+        PORT : process.env.PORT ? Number(process.env.PORT) : undefined,
+        EMAIL : process.env.EMAIL,
+        PASSWORD : process.env.PASSWORD,
     }
 };
 
